@@ -1,6 +1,7 @@
 package model;
 
 import com.thoughtworks.xstream.XStream;
+import org.apache.log4j.Logger;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -11,6 +12,7 @@ public class TrackXML implements TrackDAO{
 
     private File file;
     private XStream xStream;
+    private static final Logger logger = Logger.getLogger(TrackXML.class);
 
     public TrackXML(File file) {
         this.file = file;
@@ -20,9 +22,13 @@ public class TrackXML implements TrackDAO{
             try {
                 xStream.toXML(trackList, new FileWriter(file));
             } catch (IOException e) {
-                e.printStackTrace();
+                logger.error("IOException in constructor");
             }
         }
+    }
+
+    public File getFile() {
+        return file;
     }
 
     @Override
@@ -32,7 +38,7 @@ public class TrackXML implements TrackDAO{
         try {
             xStream.toXML(tracks, new FileWriter(file));
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.error("IOException in 'add'");
         }
     }
 
@@ -46,12 +52,13 @@ public class TrackXML implements TrackDAO{
                 track.setAlbum(newTrack.getAlbum());
                 track.setDuration(newTrack.getDuration());
                 track.setGenresId(newTrack.getGenresId());
+                break;
             }
         }
         try {
             xStream.toXML(tracks, new FileWriter(file));
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.error("IOException in 'update'");
         }
     }
 
@@ -67,7 +74,7 @@ public class TrackXML implements TrackDAO{
         try {
             xStream.toXML(tracks, new FileWriter(file));
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.error("IOException in 'delete'");
         }
     }
 
@@ -87,7 +94,7 @@ public class TrackXML implements TrackDAO{
         try {
             return (List<Track>) xStream.fromXML(new FileReader(file));
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            logger.error("FileNotFoundException in 'getAll'");
         }
         return null;
     }

@@ -7,7 +7,7 @@ public interface GenreDAO {
 
     void add(Genre newGenre);
     void update(UUID id, String newName);
-    void delete(UUID id, TrackFile toDelete);
+    void delete(UUID id, TrackXML toDelete);
     Genre getGenre(UUID id);
     List<Genre> getAll();
 

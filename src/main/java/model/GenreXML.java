@@ -1,6 +1,7 @@
 package model;
 
 import com.thoughtworks.xstream.XStream;
+import org.apache.log4j.Logger;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -11,7 +12,7 @@ public class GenreXML implements GenreDAO {
 
     private File file;
     private XStream xStream;
-    //private List<Genre> genreList;
+    private static final Logger logger = Logger.getLogger(GenreXML.class);
 
     public GenreXML(File file) {
         this.file = file;
@@ -22,7 +23,7 @@ public class GenreXML implements GenreDAO {
             try {
                 xStream.toXML(list, new FileWriter(file));
             } catch (IOException e) {
-                e.printStackTrace();
+                logger.error("IOException in constructor");
             }
         }
     }
@@ -34,9 +35,9 @@ public class GenreXML implements GenreDAO {
             genres.add(newGenre);
             xStream.toXML(genres, printWriter);
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            logger.error("FileNotFoundException in 'add'");
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.error("IOException in 'add'");
         }
     }
 
@@ -51,12 +52,35 @@ public class GenreXML implements GenreDAO {
         try(PrintWriter printWriter = new PrintWriter(new FileWriter(file))) {
             xStream.toXML(genres, printWriter);
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.error("IOException in 'update'");
         }
     }
 
     @Override
-    public void delete(UUID id, TrackFile toDelete) {
+    public void delete(UUID id, TrackXML trackXML) {
+        List<Genre> genres = getAll();
+        for (Genre genre : genres) {
+            if (genre.getId().equals(id)) {
+                genres.remove(genre);
+                break;
+            }
+        }
+        try {
+            xStream.toXML(genres, new FileWriter(file));
+            List<Track> tracks = trackXML.getAll();
+            for (Track track : tracks) {
+                List<UUID> uuidList = track.getGenresId();
+                for (UUID genreID  : uuidList) {
+                    if (genreID.equals(id)) {
+                        uuidList.remove(genreID);
+                        break;
+                    }
+                }
+            }
+            xStream.toXML(tracks, new FileWriter(trackXML.getFile()));
+        } catch (IOException e) {
+            logger.error("IOException in 'delete'");
+        }
     }
 
     @Override
@@ -72,12 +96,10 @@ public class GenreXML implements GenreDAO {
 
     @Override
     public List<Genre> getAll() {
-        try(BufferedReader bufferedReader = new BufferedReader(new FileReader(file))) {
-            return (List<Genre>) xStream.fromXML(bufferedReader);
+        try {
+            return (List<Genre>) xStream.fromXML(new FileReader(file));
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
+            logger.error("FileNotFoundException in 'getAll'");
         }
         return null;
     }
