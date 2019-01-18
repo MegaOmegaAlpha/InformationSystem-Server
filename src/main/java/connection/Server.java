@@ -11,7 +11,7 @@ import java.net.SocketException;
 
 public class Server implements Runnable {
 
-    Socket socket;
+    private Socket socket;
     private static final Logger logger = Logger.getLogger(Server.class);
 
     public Server(Socket socket) {

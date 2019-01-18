@@ -4,6 +4,8 @@ import org.apache.log4j.Logger;
 
 import java.io.IOException;
 import java.net.ServerSocket;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class MainServer {
 
@@ -13,9 +15,13 @@ public class MainServer {
         logger.info("Server started");
         try {
             ServerSocket serverSocket = new ServerSocket(0066);
-            while (true) {
-                new Thread(new Server(serverSocket.accept())).start();
+            ExecutorService executor = Executors.newCachedThreadPool();
+            Thread mainThread = Thread.currentThread();
+            while (!mainThread.isInterrupted()) {
+                executor.submit(new Server(serverSocket.accept()));
+                System.out.println("something");
             }
+            executor.shutdownNow();
         } catch (IOException e) {
             e.printStackTrace();
         }
