@@ -98,4 +98,14 @@ public class TrackXML implements TrackDAO{
         }
         return null;
     }
+
+    public UUID getTrackKeyByName(String name) {
+        List<Track> trackList = getAll();
+        for (Track track : trackList) {
+            if (track.getName().equals(name)) {
+                return track.getId();
+            }
+        }
+        return null;
+    }
 }

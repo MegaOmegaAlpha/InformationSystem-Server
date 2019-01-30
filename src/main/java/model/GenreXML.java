@@ -94,6 +94,16 @@ public class GenreXML implements GenreDAO {
         return null;
     }
 
+    public UUID getGenreIdByName(String name) {
+        List<Genre> genreList = getAll();
+        for (Genre genre : genreList) {
+            if (genre.getName().equals(name)) {
+                return genre.getId();
+            }
+        }
+        return null;
+    }
+
     @Override
     public List<Genre> getAll() {
         try {
