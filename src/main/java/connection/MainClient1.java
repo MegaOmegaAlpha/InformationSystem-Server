@@ -1,13 +1,15 @@
 package connection;
 
+import model.Track;
 import org.apache.log4j.Logger;
+import protocol.Command;
+import protocol.SimpleMessageForTraining;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.ObjectInput;
-import java.io.ObjectInputStream;
+import java.io.*;
 import java.net.ConnectException;
 import java.net.Socket;
+import java.util.List;
+import java.util.Scanner;
 
 public class MainClient1 {
 
@@ -15,11 +17,23 @@ public class MainClient1 {
     public static void main(String[] args) {
         try {
             Socket socket = new Socket("localhost", 0066);
+            ObjectOutputStream objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
+            ObjectInputStream objectInputStream;
             while (true) {
-                InputStream inputStream = socket.getInputStream();
-                ObjectInputStream objectInputStream = new ObjectInputStream(inputStream);
-                String answer = (String) objectInputStream.readObject();
-                System.out.println(answer);
+                System.out.println("Print command:");
+                Scanner scanner = new Scanner(System.in);
+                SimpleMessageForTraining message;
+                switch (scanner.next()) {
+                    case "GetAll":
+                        message = new SimpleMessageForTraining(Command.GetAll, null);
+                        objectOutputStream.writeObject(message);
+                        objectInputStream = new ObjectInputStream(socket.getInputStream());
+                        List<Track> trackList = (List<Track>) objectInputStream.readObject();
+                        for (Track track : trackList) {
+                            System.out.println(track.getName());
+                        }
+                        break;
+                }
             }
         } catch (ConnectException e) {
             logger.error("Connection is not set", e);
