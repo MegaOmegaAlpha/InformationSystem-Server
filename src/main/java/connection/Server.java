@@ -1,10 +1,11 @@
 package connection;
 
+import controller.Message;
+import controller.MessageHandler;
 import model.Genre;
 import model.Track;
 import model.TrackXML;
 import org.apache.log4j.Logger;
-import protocol.SimpleMessageForTraining;
 
 import java.io.*;
 import java.net.ServerSocket;
@@ -27,29 +28,12 @@ public class Server implements Runnable {
     public void run() {
         try {
             ObjectInputStream objectInputStream;
-            SimpleMessageForTraining message;
-            TrackXML trackXML = new TrackXML(new File("target/tracksToSend"));
             ObjectOutputStream objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
             while (!Thread.currentThread().isInterrupted()) {
                 objectInputStream = new ObjectInputStream(socket.getInputStream());
-                message = (SimpleMessageForTraining) objectInputStream.readObject();
-                switch (message.getCommand()) {
-                    case Add:
-                        break;
-                    case Get:
-                        /*
-                        controller methods have to be called in cases?
-                         */
-                        objectOutputStream.writeObject(trackXML.getTrack(message.getTrackId()));
-                        break;
-                    case Delete:
-                        break;
-                    case Update:
-                        break;
-                    case GetAll:
-                        objectOutputStream.writeObject(trackXML.getAll());
-                        break;
-                }
+                Message message = (Message) objectInputStream.readObject();
+                MessageHandler messageHandler = new MessageHandler();
+                messageHandler.handle(message);
             }
         } catch (SocketException e) {
             try {

@@ -10,5 +10,5 @@ public interface GenreDAO {
     void delete(UUID id, TrackXML toDelete);
     Genre getGenre(UUID id);
     List<Genre> getAll();
-
+    UUID getGenreIdByName(String name);
 }

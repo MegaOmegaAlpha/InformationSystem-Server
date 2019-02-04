@@ -10,5 +10,5 @@ public interface TrackDAO {
     void delete(UUID id);
     Track getTrack(UUID id);
     List<Track> getAll();
-
+    UUID getTrackIdByName(String name);
 }
