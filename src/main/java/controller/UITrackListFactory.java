@@ -7,6 +7,13 @@ import model.TrackXML;
 import java.io.File;
 
 public class UITrackListFactory {
+    /**
+     * Returns a new instance of a tracklist.
+     * Creates a new genrefile if it doesn't exist.
+     * @param trackPath path to the track file
+     * @param genrePath path to the genre file
+     * @return new tracklist
+     */
     public UITrackList getUITrackList(String trackPath, String genrePath) {
         if (trackPath == null || genrePath == null) {
             //return new UITrackListImpl(new TestTrackFile(), new TestGenreFile());
