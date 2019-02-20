@@ -10,6 +10,13 @@ public class UITrackUtils {
     private static final int SECONDS_IN_HOUR = 3600;
     private static final int SECONDS_IN_MINUTE = 60;
 
+    /**
+     * Creates a string representation of time.
+     * Hours, minutes and seconds will be separated with ':'
+     * If duration is too short hours and minutes will not appear.
+     * @param time time in seconds
+     * @return string representation of time
+     */
     public static String intTimeToString(int time){
         StringBuilder str = new StringBuilder();
 
@@ -30,6 +37,12 @@ public class UITrackUtils {
         return str.toString();
     }
 
+    /**
+     * Parses the amount of time in seconds from its string representation.
+     * Hours minutes and seconds must be in that order and separated with ':'
+     * @param time string representation of time
+     * @return time in seconds
+     */
     public static int stringTimeToInt(String time){
         String[] splitTime = time.split(":");
 
@@ -45,6 +58,12 @@ public class UITrackUtils {
         }
     }
 
+    /**
+     * Transforms a list into a string with items separated by a chosen separator.
+     * @param list list to convert
+     * @param separator separator to use
+     * @return string representation of a list
+     */
     public static String listToString(List<String> list, String separator) {
         if (list.isEmpty()) return "unknown";
         else {
@@ -59,6 +78,12 @@ public class UITrackUtils {
         }
     }
 
+    /**
+     * Splits a string representation of a list back into a list.
+     * @param string string representation of a list
+     * @param separator separator used to create string
+     * @return original list
+     */
     public static List<String> stringToList(String string, String separator) {
         List<String> res = new ArrayList<>();
 

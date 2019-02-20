@@ -12,5 +12,6 @@ public interface UITrackList {
     void markAsChanged(UITrack track);
     UITrack newTrack();
     void synchronize();
+    List<UITrack> find(String artists, String album, String name, String duration, String genre);
 //  GenreDAO getGenreFile();
 }
