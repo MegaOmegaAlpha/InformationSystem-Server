@@ -17,6 +17,7 @@ public class MainServer {
 
     public static void main(String[] args) {
         logger.info("Server started");
+        System.out.println("Server started");
         try {
             ServerSocket serverSocket = new ServerSocket(0066);
             ExecutorService executor = Executors.newCachedThreadPool();
@@ -29,13 +30,6 @@ public class MainServer {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        /*TrackXML trackXML = new TrackXML(new File("target/tracksToSend"));
-        Random random = new Random();
-        for (int i = 1; i < 51; i++) {
-            trackXML.add(new Track("Best song" + i, new LinkedList<>(Arrays.asList(new String[] {"Andrey" + i})),
-                    Optional.of("Album" + i), 60 + random.nextInt(1800 - 60 + 1),
-                    new LinkedList<>(Arrays.asList(UUID.randomUUID()))));
-        }*/
     }
 
 }

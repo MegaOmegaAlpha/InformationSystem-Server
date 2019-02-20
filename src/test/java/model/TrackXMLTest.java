@@ -30,7 +30,7 @@ public class TrackXMLTest {
                     Optional.of("Album" + i), 60 + random.nextInt(1800 - 60 + 1),
                     new LinkedList<>(Arrays.asList(UUID.randomUUID()))));
         }
-        Track track = trackXML.getTrack(trackXML.getTrackKeyByName("Best song2"));
+        Track track = trackXML.getTrack(trackXML.getTrackIdByName("Best song2"));
         track.setName("Best song ever");
         trackXML.update(track.getId(), track);
     }
@@ -44,7 +44,7 @@ public class TrackXMLTest {
                     Optional.of("Album" + i), 60 + random.nextInt(1800 - 60 + 1),
                     new LinkedList<>(Arrays.asList(UUID.randomUUID()))));
         }
-        trackXML.delete(trackXML.getTrackKeyByName("Best song4"));
+        trackXML.delete(trackXML.getTrackIdByName("Best song4"));
         Assert.assertEquals(49, trackXML.getAll().size());
     }
 
@@ -57,7 +57,7 @@ public class TrackXMLTest {
                     Optional.of("Album" + i), 60 + random.nextInt(1800 - 60 + 1),
                     new LinkedList<>(Arrays.asList(UUID.randomUUID()))));
         }
-        Assert.assertEquals("Best song13", trackXML.getTrack(trackXML.getTrackKeyByName("Best song13")).getName());
+        Assert.assertEquals("Best song13", trackXML.getTrack(trackXML.getTrackIdByName("Best song13")).getName());
     }
 
     @Test
