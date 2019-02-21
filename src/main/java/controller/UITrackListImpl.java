@@ -147,6 +147,11 @@ public class UITrackListImpl implements UITrackList {
         changedTracks.add(track);
     }
 
+    public void markAsNew(UITrack track) {
+        newTracks.add(track);
+        tracks.add(track);
+    }
+
     /**
      * Adds a track to the tracklist and marks it as new.
      * Only saves changes upon calling the synchronize method.
@@ -155,8 +160,8 @@ public class UITrackListImpl implements UITrackList {
     @Override
     public UITrack newTrack() {
         UITrackImpl track = new UITrackImpl(genreFile);
-        newTracks.add(track);
-        tracks.add(track);
+        /*newTracks.add(track);
+        tracks.add(track);*/
         return track;
     }
 }

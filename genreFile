@@ -1,0 +1,26 @@
+<Genres>
+  <model.Genre>
+    <id>1b7514c5-e9d2-4377-b228-5f23daa432cb</id>
+    <name>Blues</name>
+  </model.Genre>
+  <model.Genre>
+    <id>baaac02d-d548-4a17-80a9-b7f4ce8a9763</id>
+    <name>Rock</name>
+  </model.Genre>
+  <model.Genre>
+    <id>917d3a79-a83b-4664-bb72-123e0acbf618</id>
+    <name>Rap</name>
+  </model.Genre>
+  <model.Genre>
+    <id>474d1b2e-eddf-4ac8-97b8-9ac4fe0ffd48</id>
+    <name>Jazz</name>
+  </model.Genre>
+  <model.Genre>
+    <id>bc3773d8-887c-44e5-8499-c57682d832cc</id>
+    <name>Classic</name>
+  </model.Genre>
+  <model.Genre>
+    <id>a1328ca1-9147-45c2-86a3-6e3071d40296</id>
+    <name>Country</name>
+  </model.Genre>
+</Genres>

@@ -41,6 +41,7 @@ public class MessageHandler {
                 return response;
 
             case ID_SAVE:
+                trackList.markAsNew(m.track);
                 trackList.synchronize();
                 response.actionID = Message.ActionID.ID_SAVE;
                 response.success = true;

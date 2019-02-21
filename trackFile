@@ -1,0 +1,13 @@
+<list>
+  <model.Track>
+    <id>c019506b-1e5d-4e1c-9577-59905f5503cd</id>
+    <name>SongName</name>
+    <artists/>
+    <album>SongAlbum</album>
+    <duration>12</duration>
+    <genresId>
+      <uuid>1b7514c5-e9d2-4377-b228-5f23daa432cb</uuid>
+      <uuid>baaac02d-d548-4a17-80a9-b7f4ce8a9763</uuid>
+    </genresId>
+  </model.Track>
+</list>
