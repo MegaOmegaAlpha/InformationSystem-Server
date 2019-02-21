@@ -28,7 +28,7 @@ import java.util.List;
 public class Message implements Serializable {
     static final long serialVersionUID = 1L;
 
-    public enum ActionID { ID_INIT, ID_GET, ID_DELETE, ID_EDIT, ID_NEW, ID_SAVE }
+    public enum ActionID { ID_INIT, ID_GET, ID_DELETE, ID_EDIT, ID_NEW, ID_FIX_NEW, ID_SAVE }
 
     ActionID actionID;
 

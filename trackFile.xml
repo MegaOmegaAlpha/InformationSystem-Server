@@ -2,7 +2,11 @@
   <model.Track>
     <id>c019506b-1e5d-4e1c-9577-59905f5503cd</id>
     <name>SongName</name>
-    <artists/>
+    <artists>
+      <string>Andrey</string>
+      <string>Vlad</string>
+      <string>Lena</string>
+    </artists>
     <album>SongAlbum</album>
     <duration>12</duration>
     <genresId>

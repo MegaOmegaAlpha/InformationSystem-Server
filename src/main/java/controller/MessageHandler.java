@@ -28,6 +28,12 @@ public class MessageHandler {
                 response.success = true;
                 return response;
 
+            case ID_FIX_NEW:
+                trackList.markAsNew(m.track);
+                response.actionID = Message.ActionID.ID_FIX_NEW;
+                response.success = true;
+                return response;
+
             case ID_DELETE:
                 trackList.delete(m.track);
                 response.actionID = Message.ActionID.ID_DELETE;
@@ -41,7 +47,6 @@ public class MessageHandler {
                 return response;
 
             case ID_SAVE:
-                trackList.markAsNew(m.track);
                 trackList.synchronize();
                 response.actionID = Message.ActionID.ID_SAVE;
                 response.success = true;
@@ -59,7 +64,11 @@ public class MessageHandler {
                     if ( pages == page )
                         response.end = true;
                     for ( int i = page - 1; i < page + 10; i++ ) {
-                        shortList.add(list.get(i));
+                        try {
+                            shortList.add(list.get(i));
+                        } catch (IndexOutOfBoundsException e) {
+
+                        }
                     }
                     response.list = shortList;
                     response.success = true;
