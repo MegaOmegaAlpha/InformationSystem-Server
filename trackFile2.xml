@@ -141,16 +141,16 @@
     </genresId>
   </model.Track>
   <model.Track>
-    <id>27fd53e1-8282-4ff1-951d-7c1c63e11d8d</id>
-    <name>Track13</name>
+    <id>cdb0fde7-874e-4895-b93f-8060c95c9ca2</id>
+    <name>new Track</name>
     <artists>
-      <string>hgfdd</string>
+      <string>by new Artist</string>
     </artists>
-    <album>gfd</album>
-    <duration>45</duration>
+    <album>of new  Album</album>
+    <duration>123</duration>
     <genresId>
-      <uuid>1b7514c5-e9d2-4377-b228-5f23daa432cb</uuid>
-      <uuid>bc3773d8-887c-44e5-8499-c57682d832cc</uuid>
+      <uuid>917d3a79-a83b-4664-bb72-123e0acbf618</uuid>
+      <uuid>a1328ca1-9147-45c2-86a3-6e3071d40296</uuid>
     </genresId>
   </model.Track>
 </list>

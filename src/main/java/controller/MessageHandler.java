@@ -10,11 +10,11 @@ public class MessageHandler {
     public Message handle(Message m){
         Message response = new Message();
 
-        switch (m.actionID){
-            case ID_INIT:
+        switch (m.actionType){
+            case INIT:
                 UITrackListFactory factory = new UITrackListFactory();
                 trackList = factory.getUITrackList(m.trackfile, m.genrefile);
-                response.actionID = Message.ActionID.ID_INIT;
+                response.actionType = Message.ActionType.INIT;
                 if (trackList == null) {
                     response.success = false;
                 } else {
@@ -22,44 +22,44 @@ public class MessageHandler {
                 }
                 return response;
 
-            case ID_NEW:
+            case NEW:
                 response.track = trackList.newTrack();
-                response.actionID = Message.ActionID.ID_NEW;
+                response.actionType = Message.ActionType.NEW;
                 response.success = true;
                 return response;
 
-            case ID_FIX_NEW:
+            case FIX_NEW:
                 trackList.markAsNew(m.track);
-                response.actionID = Message.ActionID.ID_FIX_NEW;
+                response.actionType = Message.ActionType.FIX_NEW;
                 response.success = true;
                 return response;
 
-            case ID_DELETE:
+            case DELETE:
                 trackList.delete(m.track);
-                response.actionID = Message.ActionID.ID_DELETE;
+                response.actionType = Message.ActionType.DELETE;
                 response.success = true;
                 return response;
 
-            case ID_EDIT:
+            case EDIT:
                 trackList.markAsChanged(m.track);
-                response.actionID = Message.ActionID.ID_EDIT;
+                response.actionType = Message.ActionType.EDIT;
                 response.success = true;
                 return response;
 
-            case ID_SAVE:
+            case SAVE:
                 trackList.synchronize();
-                response.actionID = Message.ActionID.ID_SAVE;
+                response.actionType = Message.ActionType.SAVE;
                 response.success = true;
                 return response;
-            case ID_SIZE:
+            case SIZE:
                 response.size = trackList.size();
-                response.actionID = Message.ActionID.ID_SIZE;
+                response.actionType = Message.ActionType.SIZE;
                 response.success = true;
                 return response;
-            case ID_GET:
+            case GET:
                 List<UITrack> list = trackList.getTracks();
                 int page = m.page;
-                response.actionID = Message.ActionID.ID_GET;
+                response.actionType = Message.ActionType.GET;
                 int pages = list.size()/8 + ((list.size()%8 == 0)? 0 : 1);
                 if ( pages < page || page < 0)
                     response.success = false;

@@ -27,7 +27,7 @@
                         <manifest>
                             <addClasspath>true</addClasspath>
                             <classpathPrefix>lib/</classpathPrefix> <!-- все зависимости будут искаться в папке 'lib' рядом с джарником -->
-                            <mainClass>start.Main<!-- тут надо указать полное (с пакетом) имя Main класса --></mainClass> <!-- это нужно, чтобы jar запускался мышкой как exe -->
+                            <mainClass>connection.MainServer</mainClass> <!-- это нужно, чтобы jar запускался мышкой как exe -->
                         </manifest>
                     </archive>
                     <outputDirectory>${project.build.directory}/dist</outputDirectory> <!-- все пойдет в папку /target/dist -->
