@@ -19,6 +19,11 @@ public class Genre implements Serializable {
 
     }
 
+    public Genre(String name, String toGenerateUuid) {
+        this.id = UUID.fromString(toGenerateUuid);
+        this.name = name;
+    }
+
     public Genre(String name) {
         this.id = UUID.randomUUID();
         this.name = name;
