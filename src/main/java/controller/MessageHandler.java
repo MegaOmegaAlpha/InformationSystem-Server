@@ -51,23 +51,26 @@ public class MessageHandler {
                 response.actionID = Message.ActionID.ID_SAVE;
                 response.success = true;
                 return response;
-
+            case ID_SIZE:
+                response.size = trackList.size();
+                response.actionID = Message.ActionID.ID_SIZE;
+                response.success = true;
+                return response;
             case ID_GET:
                 List<UITrack> list = trackList.getTracks();
                 int page = m.page;
                 response.actionID = Message.ActionID.ID_GET;
-                int pages = list.size()/10 + ((list.size()%10 == 0)? 0 : 1);
+                int pages = list.size()/8 + ((list.size()%8 == 0)? 0 : 1);
                 if ( pages < page || page < 0)
                     response.success = false;
                 else {
                     List<UITrack> shortList = new ArrayList<>();
-                    if ( pages == page )
-                        response.end = true;
-                    for ( int i = page - 1; i < page + 10; i++ ) {
+//                    if ( pages == page )
+//                        response.end = true;
+                    for ( int i = (page - 1)*8; i < page*8; i++ ) {
                         try {
                             shortList.add(list.get(i));
                         } catch (IndexOutOfBoundsException e) {
-
                         }
                     }
                     response.list = shortList;

@@ -135,6 +135,7 @@ public class UITrackListImpl implements UITrackList {
     public void delete(UITrack track) {
         deleteTracks.add(track);
         tracks.remove(track);
+        synchronize();
     }
 
     /**
